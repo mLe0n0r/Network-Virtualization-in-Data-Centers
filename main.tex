@@ -1,0 +1,210 @@
+\documentclass[a4paper, 11pt, twoside]{article}
+
+\usepackage[english]{babel}
+\usepackage{titlesec}
+
+\usepackage{afterpage}
+\usepackage{makeidx}
+\usepackage[hyphenbreaks]{breakurl}
+
+\usepackage{caption}
+\captionsetup[figure]{font=small}
+\usepackage{subcaption}
+\newcommand{\source}[1]{\caption*{Source: {#1}} }
+
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\figurename}{Figure}
+
+\usepackage{cancel}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{mathtools}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+\usepackage{multicol,lipsum}
+
+\usepackage{listings}
+\usepackage{indentfirst}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{comment}
+\usepackage{float}
+
+\usepackage{pdfpages} % Package para pdf segundo o Stack Overflow
+
+\usepackage{color, colortbl}
+
+\usepackage{sectsty}
+
+\usepackage[a4paper, total={6in, 9in}]{geometry}
+\usepackage{blindtext}
+\usepackage{lastpage}
+
+\geometry{
+  inner= 2.5 cm, 
+  outer= 2.5 cm,
+  top= 2.5 cm,       % Margem superior
+  bottom= 2.5 cm     % Margem inferior
+}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{} % limpa tudo
+
+% Usa slots para páginas pares e ímpares (funciona em one/two-side)
+\fancyhead[LE,LO]{Network Virtualization in Data Centers}
+\fancyhead[RE,RO]{Group 5}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{15pt}
+
+% Torna o estilo "plain" (usado por TOC/LOF) igual ao acima
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyhead[LE,LO]{Network Virtualization in Data Centers}
+  \fancyhead[RE,RO]{Group 5}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \fancyfoot[C]{\thepage}
+}
+
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{wrapfig}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usepackage{tocloft}
+
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{0em}{0em}}
+\makeatother
+
+\setlength{\cftafterloftitleskip}{40pt}
+
+\makeatletter
+\renewcommand{\l@figure}[2]{%
+  \begingroup
+    \renewcommand{\numberline}[1]{Figure~##1:\enspace}%
+    \@dottedtocline{1}{1em}{1em}{#1}{#2}%
+  \endgroup
+}
+\makeatother
+
+\usepackage{lipsum}
+\usepackage{hyperref}
+
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+\usepackage{hyperref}
+\let\oldunderbar\underbar
+\renewcommand{\underbar}[1]{\oldunderbar{#1}}
+
+
+\renewcommand{\cfttabpresnum}{}
+\renewcommand{\cfttabaftersnum}{}
+\setlength{\cftfignumwidth}{0pt} 
+\setlength{\cfttabnumwidth}{0pt} 
+
+\usepackage[backend=biber,style=ieee]{biblatex}
+\addbibresource{refs.bib}
+
+\usepackage[acronym]{glossaries}
+\usepackage{acronym}
+\makeglossaries
+% ------------------------ Capa ------------------------ 
+\begin{document}
+
+\begin{titlepage} % Criar página de título personalizada
+
+    \begin{center} % centrar
+        
+
+        \vspace{50pt}
+    
+        \begin{figure}[h] % \begin{figure}[place]
+            \centering
+            \includegraphics[scale = 1]{Figures/feup.png}
+        \end{figure}
+    
+        \vspace{50pt} % espaço vertical de 50pt
+    
+        \LARGE{\textbf{Network Virtualization in Data Centers}} \par 
+
+        \vspace{50pt}
+
+        \normalsize{ 
+        \begin{tabular}{ccc}
+            \textbf{André Silva} & \textbf{Leonor Guedes} & \textbf{Rafael Parody} \\
+            up202107419 & up202107691 & up202502656 \\
+        \end{tabular}
+        }
+
+        \mbox{}
+        \vfill
+        
+        \normalsize{ 
+        Carried out within the scope of the\\
+        “Telecommunications Networks” course\\
+        of the Master's in Electrical and Computer Engineering\\
+        }
+        \vspace{50pt}
+        \normalsize{7 of November of 2025}
+
+
+        
+    \end{center}
+
+\end{titlepage}
+
+% ------------------------ Fim Capa ------------------------
+\pagenumbering{roman}
+\setcounter{page}{2}
+
+\section*{Abstract}
+
+\paragraph{}
+
+\pagebreak
+
+% ----------- índice -----------
+\tableofcontents
+
+
+\newpage
+
+% ----------- Lista de Figuras -----------
+
+\listoffigures
+
+\newpage
+% ----------- Abreviaturas -----------
+\section*{List of Abbreviations}
+\paragraph{}
+\input{abbreviations.tex}
+\newpage
+
+% ----------- 
+\pagenumbering{arabic}
+
+\input{1 - Intro.tex}
+\input{2 - DataCenters}
+\input{3 - Technologies}
+
+% ----------- 
+\newpage
+
+\nocite{*}
+\printbibliography
+
+\end{document}
+

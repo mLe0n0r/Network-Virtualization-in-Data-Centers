@@ -1,0 +1,23 @@
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.run.xml
+*.gz
+out/
+
+# === VS Code ===
+.vscode/
+
+# === System ===
+Thumbs.db
+*.tmp
+*.bak
