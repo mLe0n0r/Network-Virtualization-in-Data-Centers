@@ -1,4 +1,4 @@
-\section{Technologies}
+\section{Overlay Network Technologies}
 After defining the fundamental architecture of modern data centers, the following section examines the core technologies that enable network virtualization.
 
 \subsection{Virtual Extensible LAN}
@@ -77,3 +77,17 @@ In terms of support, Geneve has been widely adopted in software-based network in
 
 \subsection{Stateless Transport Tunnelling}
 
+Stateless Transport Tunnelling (STT) is a comparatively recent addition to network virtualization technologies, developed as an alternative to existing protocols such as VXLAN and NVGRE. It is designed to support overlay networks within multi-tenant environments, providing tenants with control over their logical network domains. The primary objective of STT is to enhance the efficiency of network virtualization by encapsulating and forwarding packets between virtualized environments across a physical underlay network.
+
+STT is one of the principal Layer 2 over Layer 3 tunnelling mechanisms used in network virtualization. Its distinguishing feature lies in the fact that STT packets are processed as standard TCP packets by physical Network Interface Cards (NICs). This allows NICs to leverage the TCP Segmentation Offload (TSO) capability to handle large STT packets efficiently. Under normal circumstances, large data payloads are divided at the TCP layer within the operating system kernel to maintain the size of each TCP segment below the Maximum Segment Size (MSS) threshold. With TSO, this segmentation process is offloaded to the physical NIC, thereby reducing CPU utilization on the host and improving overall performance.
+
+In addition to TSO integration, STT exhibits several important characteristics. It employs MAC-in-IP tunnelling and uses 64-bit context identifiers, which significantly increase the number of possible virtual networks and enable broader service model scalability. The protocol achieves notable performance gains by exploiting hardware-based TSO capabilities, thereby minimizing the overhead associated with transmitting multiple small packets. STT operates in a stateless manner, with its packets supporting unicast communication between tunnel endpoints without relying on TCP windowing, synchronization or flow-control mechanisms. Moreover, STT can be implemented within software-based switches while still benefiting from hardware acceleration through compatible NICs, which substantially reduces the computational load on servers operating in high-bandwidth environments (10 Gbps and above).
+
+Figure \ref{STT} shows the sequence of encapsulation and segmentation of a VM’s Ethernet frame at the transmitting endpoint. When the TSO feature is enabled on the virtual NIC, the virtual machine may generate large Ethernet frames. Then a tunnel endpoint, such as a virtual switch or a centralized virtual switch (CVSW), encapsulates the frame with STT and pseudo-TCP (P-TCP) headers. Finally, the underlying physical NIC subsequently divides the encapsulated frame into multiple smaller frames, each carrying consecutive sequence numbers within the P-TCP header. On the receiving side, the corresponding tunnel endpoint must reassemble the P-TCP segments prior to decapsulation, as only the first segment contains the STT and inner headers.
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.55\linewidth]{Figures/STT.png}
+    \caption{STT's encapsulation and segmentation flows with TSO feature. \cite{kawashima2020stt}}
+    \label{STT}
+\end{figure}
