@@ -17,8 +17,9 @@ The foundation of modern data centers lies in the separation between the underla
     \centering
     \vspace{-5pt}
     \includegraphics[width=0.9\linewidth]{Figures/LeafSpine.png}
-    \caption{Leaf-spine structure.}
+    \caption{Leaf-spine structure. \cite{leafspine}}
     \label{leafSpine}
+    \vspace{-10pt}
 \end{wrapfigure}
 
 The underlay corresponds to the physical IP fabric of the network, typically organized in a Layer 3 leaf-spine topology. This topology, as illustrated in Figure \ref{leafSpine}, consists of two layers: the spine, formed by high-speed switches that constitute the network backbone; and the leaf, consisting of access switches that connect servers, storage devices and other endpoints. The primary objective of the underlay is to transport packets quickly and efficiently. For this reason, a high MTU, usually around 9000 bytes, is used to to accommodate encapsulation overhead and minimize fragmentation. 
@@ -35,7 +36,7 @@ A Virtualized Data Center (VDC) is a data center where some or all the hardware 
     \centering
     \vspace{-10pt}
     \includegraphics[width=0.8\linewidth]{Figures/virtualization.png}
-    \caption{Virtualization of a Data Center.}
+    \caption{Virtualization of a Data Center. \cite{bari2013datacenter}}
     \label{virtualization}
     \vspace{-10pt}
 \end{wrapfigure}
