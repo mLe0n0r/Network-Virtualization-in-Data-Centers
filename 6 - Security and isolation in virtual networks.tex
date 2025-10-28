@@ -1,0 +1,25 @@
+\section{Security and Isolation in virtual networks}
+
+This section aims to present a comprehensive list of vulnerabilities and threats found in network virtualization environments and some solutions that aim to provide security and protect the environment from the security threats.
+
+\subsection{Vulnerabilities and threats}
+
+In environments where physical resources are shared among multiple virtual networks, certain behaviours may lead to the undesired disclosure of information. The following section explains threats related to the disclosure of private or sensitive information.
+
+One significant vulnerability in this context is information interception. In such attack, attackers in a virtual network environment capture messages exchanged between two entities to access their content. This technique, commonly kwon as eavesdropping or sniffing, may lead to the theft of confidential information. For example, an attacker could mislead physical routers into forwarding packets intended for one entity to another, enabling them to intercept such packets. While this represents a general threat in most networking contexts, the use of shared physical infrastructure by multiple virtual networks amplifies the risk. Moreover, networking solutions provided by virtual machine monitors may not always ensure proper data isolation between tenants, which can allow members of one virtual network to access information belonging to another that shares the same substrate.
+
+Another relevant threat is usurpation. In virtual network environments, these attacks may enable attackers to access privileged information on virtual routers or sensitive data stored within them. Such incidents often arise from identity spoofing or the exploitation of software vulnerabilities.
+
+More critically, if an attacker manages to compromise the virtual machine monitor itself, they may escape the virtual machine and access the hardware layer. In environments employing full or paravirtualization to implement virtual routers, exploiting these vulnerabilities could give attackers full control over physical routers. Once physical devices are compromised, any virtual networks hosted on that infrastructure become easily susceptible to further attacks or manipulation.
+
+The Common Vulnerabilities and Exposures system lists several examples of such threats in practice, including vulnerabilities in different versions of VMware products that allow users of the guest operating system to potentially execute arbitrary code on the host operating system.
+
+\subsection{Security countermeasures}
+
+In order to protect the environment from the aforementioned security threats, several countermeasures can be implemented to strengthen confidentiality, integrity, and availability. One of the primary mechanisms is access control, which relies on authentication and authorization processes to verify the identity of network entities and enforce appropriate privilege levels. Authentication ensures that entities in a network environment are indeed who they claim to be, while authorization determines the specific actions or resources each entity is permitted to access. 
+
+In virtualized environments, factors such as the federation of virtual networks and the mobility of virtual routers and links make providing proper authentication complicated. As network virtualisation promotes the sharing of network devices and communication links among multiple tenants, data confidentiality is a major security concern. Equally important is data integrity, which may be compromised if shared resources or transmission channels are tampered with. 
+
+Another essential measure is non-repudiation, which provides evidence of which actions have been performed by which entities, including potentially malicious ones. This security countermeasure is highly valuable in network virtualisation environments, where numerous physical resources are shared by different users, as it enables accountability and facilitates forensic analysis following a security incident. 
+
+Lastly, ensuring the availability of virtualized network environments remains a fundamental security objective. The principal concerns in this area involve maintaining adequate resource isolation between tenants and mitigating denial-of-service or resource-exhaustion attacks targeting both physical and virtual components of the infrastructure.
