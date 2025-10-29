@@ -6,7 +6,7 @@ This section aims to present a comprehensive list of vulnerabilities and threats
 
 In environments where physical resources are shared among multiple virtual networks, certain behaviours may lead to the undesired disclosure of information. The following section explains threats related to the disclosure of private or sensitive information.
 
-One significant vulnerability in this context is information interception. In such attack, attackers in a virtual network environment capture messages exchanged between two entities to access their content. This technique, commonly kwon as eavesdropping or sniffing, may lead to the theft of confidential information. For example, an attacker could mislead physical routers into forwarding packets intended for one entity to another, enabling them to intercept such packets. While this represents a general threat in most networking contexts, the use of shared physical infrastructure by multiple virtual networks amplifies the risk. Moreover, networking solutions provided by virtual machine monitors may not always ensure proper data isolation between tenants, which can allow members of one virtual network to access information belonging to another that shares the same substrate.
+One significant vulnerability in this context is information interception. In such attack, attackers in a virtual network environment capture messages exchanged between two entities to access their content. This technique, commonly known as eavesdropping or sniffing, may lead to the theft of confidential information. For example, an attacker could mislead physical routers into forwarding packets intended for one entity to another, enabling them to intercept such packets. While this represents a general threat in most networking contexts, the use of shared physical infrastructure by multiple virtual networks amplifies the risk. Moreover, networking solutions provided by virtual machine monitors may not always ensure proper data isolation between tenants, which can allow members of one virtual network to access information belonging to another that shares the same substrate.
 
 Another relevant threat is usurpation. In virtual network environments, these attacks may enable attackers to access privileged information on virtual routers or sensitive data stored within them. Such incidents often arise from identity spoofing or the exploitation of software vulnerabilities.
 
@@ -23,3 +23,40 @@ In virtualized environments, factors such as the federation of virtual networks 
 Another essential measure is non-repudiation, which provides evidence of which actions have been performed by which entities, including potentially malicious ones. This security countermeasure is highly valuable in network virtualisation environments, where numerous physical resources are shared by different users, as it enables accountability and facilitates forensic analysis following a security incident. 
 
 Lastly, ensuring the availability of virtualized network environments remains a fundamental security objective. The principal concerns in this area involve maintaining adequate resource isolation between tenants and mitigating denial-of-service or resource-exhaustion attacks targeting both physical and virtual components of the infrastructure.
+
+\subsection{Advanced Security and Compliance in Network Virtualization}
+
+While the previous subsection addressed traditional countermeasure, modern data centers require more sophisticated mechanisms to maintain isolation and compliance in highly virtualized and dynamic environments. 
+In conventional architectures, the traffic moved between users, the data center and external network in a north-south pattern. However, in virtualized environments, the majority of data exchange now occurs east–west, referring to communication between servers, virtual machines, or applications within the same data center. This internal traffic supports operations such as database replication, API interactions and service-to-service communication. Because east–west traffic rarely leaves the data center perimeter, it often bypasses traditional firewalls and monitoring systems, creating new security blind spots.
+
+To address these challenges, modern data centers integrate security directly into the virtualized network fabric, ensuring continuous verification, workload isolation and compliance.
+
+\subsubsection{Microsegmentation and Zero Trust}
+
+Microsegmentation allows the creation of logical security zones that follow workloads, like virtual machines or containers, rather than static network boundaries. Each workload is assigned a policy determining which other workloads it may communicate with, effectively creating isolated micro-perimeters within the virtualized fabric. This approach significantly reduces lateral movement and confines potential breaches to a limited scope.
+
+The Zero Trust security paradigm complements this by assuming that no internal traffic can be trusted by default. Within a virtualised data centre, every communication attempt, whether north-south or east-west, should be authenticated, authorised and logged and policies must move with the workload as it migrates.
+
+\subsubsection{Tenant isolation}
+
+Tenant isolation in multi-tenant virtualized data centers is typically achieved through the use of Virtual Routing and Forwarding (VRF) instances in combination with EVPN control planes. Each tenant is assigned an independent routing and forwarding table, isolating broadcast and multicast domains as well as Layer 3 routing information. 
+
+EVPN provides a scalable control-plane mechanism for MAC and IP route distribution, preventing leakage of routing information between tenants. The combination of VRF segmentation and EVPN-based overlays ensures that tenant traffic remains logically separated, even when multiple networks share the same physical infrastructure.
+
+This approach not only enhances confidentiality and data segregation but also simplifies compliance with regulatory frameworks by guaranteeing deterministic traffic isolation.
+
+\subsubsection{Overlay encryption}
+
+While technologies as the ones explored before providing logical segmentation, they do not inherently protect data confidentiality or integrity. To ensure secure communication between virtual endpoints, overlay encryption mechanisms are deployed.
+
+IPsec tunnels are commonly established between VTEPs to protect traffic at the network layer, securing east–west and inter-site communications. At the same time, MACsec can be implemented at the link layer within the data center fabric to encrypt frames between switches and servers.
+
+The combination of these mechanisms guarantees that tenant traffic is protected both logically and cryptographically, preventing eavesdropping or packet manipulation even in shared or hybrid environments. This model aligns with Zero Trust principles, as data confidentiality is maintained regardless of network location or trust boundaries.
+
+\subsubsection{SDN Controller security and policy enforcement}
+
+The SDN controller is the central component of a virtualized network, responsible for orchestrating flow rules, applying policies and managing overlays. Because of this, it represents a high-value target for attackers.
+
+Securing the SDN controller involves applying strong authentication and authorization to all management and API interfaces. Communication between controllers and switches should be encrypted, for example using TLS on OpenFlow channels, and the management network should be kept separate from production traffic.
+
+Using role-based access control (RBAC), limiting privileges to what is strictly necessary, and keeping the controller software up to date helps reduce vulnerabilities. Modern controllers also support policy automation, allowing administrators to define high-level security rules that are automatically applied across the virtual network. This ensures consistent policy enforcement, easier compliance and faster adaptation when workloads or network topologies change.

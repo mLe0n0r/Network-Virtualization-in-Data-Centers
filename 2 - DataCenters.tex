@@ -12,7 +12,7 @@ The predominant network architecture in today's data centers is the leaf-spine I
 
 \subsection{Data Center Network Architecture}
 The foundation of modern data centers lies in the separation between the underlay, which represents the physical network infrastructure, and the overlay, which comprises the virtual networks. 
-\newpage
+
 \begin{wrapfigure}{r}{0.48\textwidth}
     \centering
     \vspace{-5pt}
@@ -30,19 +30,24 @@ Correct MTU configuration within the underlay is critical, as an insufficient MT
 
 \subsection{Data Centers Virtualization}
 
-A Virtualized Data Center (VDC) is a data center where some or all the hardware components, such as servers, routers, switches and network links, are virtualized. Typically, a physical hardware is virtualized using software or firmware known as hypervisor, which divides the equipment into multiple isolated and independent  
-
-\begin{wrapfigure}{r}{0.45\textwidth}
-    \centering
-    \vspace{-10pt}
-    \includegraphics[width=0.8\linewidth]{Figures/virtualization.png}
-    \caption{Virtualization of a Data Center. \cite{bari2013datacenter}}
-    \label{virtualization}
-    \vspace{-10pt}
-\end{wrapfigure}
-
-\noindent virtual instances. 
+A Virtualized Data Center (VDC) is a data center where some or all the hardware components, such as servers, routers, switches and network links, are virtualized. Typically, a physical hardware is virtualized using software or firmware known as hypervisor, which divides the equipment into multiple isolated and independent virtual instances. 
 
 A VDC is defined as a collection of virtual resources, including VMs, virtual switches, and virtual routers, connected via virtual links and therefore constitutes a segment of a Virtual Data Center. While a Virtualized Data Center is a physical data center with deployed resource virtualization techniques, a Virtual Data Center is a logical instance of a Virtualized Data Center consisting of a subset of the physical data center resources. 
 
+% \begin{wrapfigure}{r}{0.45\textwidth}
+%     \centering
+%     \vspace{-10pt}
+%     \includegraphics[width=0.8\linewidth]{Figures/virtualization.png}
+%     \caption{Virtualization of a Data Center. \cite{bari2013datacenter}}
+%     \label{virtualization}
+%     \vspace{-10pt}
+% \end{wrapfigure}
+
 A Virtual Network (VN) is a set of virtual networking resources, such as virtual nodes (end-hosts, switches, routers) and virtual links and therefore, a VN is a part of a VDC. A network virtualization level is one of the layers of the network stack (application to physical) in which the virtualization is introduced. Figure \ref{virtualization}, shows how several VDCs can be deployed over a virtualized data center. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{Figures/virtualization.png}
+    \caption{Virtualization of a Data Center. \cite{bari2013datacenter}}
+    \label{virtualization}
+\end{figure}

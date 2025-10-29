@@ -1,6 +1,9 @@
 \section{Introduction}
 \paragraph{}
-Nowadays, modern organizations rely on rapidly growing data centers that support high workloads. Therefore, the data center network must be able to isolate and move data loads, even scaling, without complicating the physical core of the network—that is, by modifying only the logical layer.\par
-Traditional VLAN-based techniques do not provide sufficient capacity for today's service needs. Therefore, network overlays allow us to create logical virtual networks on an underlay (link layer), encapsulating traffic. Among the technologies considered are VXLAN and NVGRE, which may include Geneve.
-\paragraph{}
-Work in progress
+Nowadays, modern organizations rely on rapidly expanding data centers capable of supporting increasingly demanding workloads. Consequently, the data center network must ensure the efficient isolation, mobility, and scalability of these workloads without introducing complexity into the physical infrastructure. This is achieved by operating primarily at the logical layer, allowing changes in network configuration and segmentation without modifying the physical core.
+
+Traditional VLAN-based segmentation techniques are limited in scale and flexibility, offering only 4096 identifiers, which is insufficient for the dynamic and multi-tenant nature of modern data centers. To overcome these constraints, network overlays enable the creation of virtual networks that operate on top of an existing physical underlay. Through encapsulation mechanisms, overlays transport Layer 2 traffic over a Layer 3 infrastructure, providing logical isolation and improved workload mobility across the data center fabric.
+
+This report provides an overview of network virtualization in data centers, examining its core components, underlying technologies, and operational principles. In addition, it is considered the control and orchestration mechanisms that enable automation and scalability, as well as the integration between physical and virtual infrastructures and the security challenges arising from this paradigm.
+
+The structure of this report is organized to provide a logical progression from fundamental concepts to advanced topics. In section 2 is introduced the main principles of network virtualization, followed by Section 3, which examines the most relevant overlay technologies. Section 4 describes the control and orchestration mechanisms that enable automation and scalability, while Section 5 focuses on the integration between physical and virtual layers. Finally, section 6 discusses security and compliance considerations.
